@@ -8,7 +8,7 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.8.1"
-numpy = "^1.24.1"
+numpy = "~1.23.5"  # numba (0.56.4) depends on numpy (>=1.18,<1.24)
 matplotlib = "^3.6.3"
 seaborn = "^0.12.2"
 scikit-learn = "^1.2.0"
