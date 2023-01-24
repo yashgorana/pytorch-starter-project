@@ -39,14 +39,14 @@ torch = [
 ]
 torchvision = [
   # Python 3.8
-  {url = "https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp38-cp38-linux_x86_64.whl", markers = "python_version == '3.8' andsys_platform == 'linux'"},
-  {url = "https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp38-cp38-win_amd64.whl", markers = "python_version == '3.8' andsys_platform == 'win32'" },
+  {url = "https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp38-cp38-linux_x86_64.whl", markers = "python_version == '3.8' and sys_platform == 'linux'"},
+  {url = "https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp38-cp38-win_amd64.whl", markers = "python_version == '3.8' and sys_platform == 'win32'" },
   # Python 3.9
-  {url = "https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp39-cp39-linux_x86_64.whl", markers = "python_version == '3.9' andsys_platform == 'linux'"},
-  {url = "https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp39-cp39-win_amd64.whl", markers = "python_version == '3.9' andsys_platform == 'win32'" },
+  {url = "https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp39-cp39-linux_x86_64.whl", markers = "python_version == '3.9' and sys_platform == 'linux'"},
+  {url = "https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp39-cp39-win_amd64.whl", markers = "python_version == '3.9' and sys_platform == 'win32'" },
   # Python 3.10
-  {url = "https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp310-cp310-linux_x86_64.whl", markers = "python_version == '3.10' andsys_platform == 'linux'"},
-  {url = "https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp310-cp310-win_amd64.whl", markers = "python_version == '3.10' andsys_platform == 'win32'" }
+  {url = "https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp310-cp310-linux_x86_64.whl", markers = "python_version == '3.10' and sys_platform == 'linux'"},
+  {url = "https://download.pytorch.org/whl/cu116/torchvision-0.14.1%2Bcu116-cp310-cp310-win_amd64.whl", markers = "python_version == '3.10' and sys_platform == 'win32'" }
 ]
 timm = "^0.6.12"
 
