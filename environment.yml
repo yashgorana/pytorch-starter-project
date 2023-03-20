@@ -1,0 +1,20 @@
+name: pytorch-env
+
+channels:
+  - pytorch
+  - nvidia
+  - conda-forge
+  - nodefaults
+
+dependencies:
+  - python=3.10
+  - pip
+  - conda-lock
+  - poetry=1.4.*
+  - pytorch::pytorch-cuda=11.7
+  - pytorch::pytorch=2.0.0
+  - pytorch::torchvision=0.15.1
+
+platforms:
+  - linux-64
+  - win-64
