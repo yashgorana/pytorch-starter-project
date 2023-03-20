@@ -6,12 +6,10 @@ Includes the following libraries for typical ML projects
 
 | Package                    | Description                             |
 |----------------------------|-----------------------------------------|
-| `timm`, 'transformers'     | Pre-built SOTA image models for PyTorch |
-| `numpy`                    | Numerical compute                       |
-| `pandas`                   | Working with datasets                   |
-| `matplotlib`, `seaborn`    | Build visualisations                    |
-| `requests`                 | Working with HTTP APIs                  |
-| `click`                    | building CLI apps                       |
+| `timm`, 'transformers'     | Pre-built models + weights for PyTorch  |
+| `matplotlib`, `seaborn`    | Make visualisations                     |
+| `requests`                 | Work with HTTP APIs                     |
+| `click`                    | Build CLI apps                          |
 | `mlflow`                   | E2E ML lifecycle management             |
 | `black`, `flake8`, `isort` | Code format & linting                   |
 
