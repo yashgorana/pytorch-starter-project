@@ -1,40 +1,33 @@
 # PyTorch Starter Project
 
-A start project for PyTorch 1.13 with GPU support (CUDA 11.6).
+A start project for PyTorch 2.0 with GPU support (CUDA 11.7).
 
 Includes the following libraries for typical ML projects
 
 | Package                    | Description                             |
 |----------------------------|-----------------------------------------|
-| `timm`                     | Pre-built SOTA image models FOR PyTorch |
-| `numpy`                    | Numerical compute                       |
-| `pandas`                   | Working with datasets                   |
-| `matplotlib`, `seaborn`    | Build visualisations                    |
+| `timm`, `transformers`     | Pre-built SOTA models for PyTorch       |
+| `matplotlib`, `seaborn`    | For visualizing your data               |
 | `requests`                 | Working with HTTP APIs                  |
-| `click`                    | building CLI apps                       |
+| `click`                    | Building CLI apps                       |
 | `mlflow`                   | E2E ML lifecycle management             |
 | `black`, `flake8`, `isort` | Code format & linting                   |
 
 ## Requirements
 
-This project is tested to work on Linux, Windows and WSL2. Python version requirement follows PyTorch requirement for each platform.
-
-Currently supports: Python `3.8`, `3.9`
+Currently supports Conda/Miniconda/Mamba running on Linux & Windows
 
 ## Setup
 
-Run the following to install poetry
+First setup a Python 3.10 + Pytorch 2.0 environment using conda
 
-    $ pip install --upgrade poetry
+    $ pip install conda-lock
+    $ conda-lock install -p .venv
 
-Then run the following to install the dependencies
+Then install additional python packages inside this environment
 
+    $ conda activate .venv/
     $ poetry install
-
-To add a new dependency, just run
-
-    $ poetry add <package_name>
-
 
 ## License
 

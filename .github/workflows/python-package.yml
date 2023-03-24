@@ -6,45 +6,77 @@ name: Build & Verify Project
 on:
   push:
     branches: [ "main" ]
-#     paths:
-#       - 'pyproject.toml'
-#       - 'poetry.toml'
-#       - 'poetry.lock'
-#       - 'setup.cfg'
+    paths:
+      - 'poetry.*'
+      - 'conda*.lock'
+      - 'environment.yml'
+      - 'pyproject.toml'
+      - 'setup.cfg'
   pull_request:
     branches: [ "main" ]
-#     paths:
-#       - 'pyproject.toml'
-#       - 'poetry.toml'
-#       - 'poetry.lock'
-#       - 'setup.cfg'
+    paths:
+      - 'poetry.*'
+      - 'conda-*.lock'
+      - 'environment.yml'
+      - 'pyproject.toml'
+      - 'setup.cfg'
 
 jobs:
-  build:
-    name: Build with ${{ matrix.python-version }} on ${{ matrix.os }}
-    runs-on: ${{ matrix.os }}
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.8", "3.9"]
-        os: [ubuntu-latest, windows-latest]
+  build-linux:
+    name: Build with ubuntu-latest
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
+    env:
+      CONDA_ENV_NAME: pytorch2-env
 
     steps:
     - uses: actions/checkout@v3
-    - name: Set up Python ${{ matrix.python-version }}
-      uses: actions/setup-python@v3
+
+    - name: Cache conda packages
+      uses: actions/cache@v3
+      env:
+        # Increase this value to reset cache
+        CACHE_NUMBER: 0
       with:
-        python-version: ${{ matrix.python-version }}
-    - name: Install dependencies + Torch GPU
+        path: ~/conda_pkgs_dir
+        key: ${{ runner.os }}-conda-lock-${{ env.CACHE_NUMBER }}-${{ hashFiles('conda-linux-64.lock') }}
+
+    - name: Cache conda environment
+      uses: actions/cache@v3
+      env:
+        # Increase this value to reset cache
+        CACHE_NUMBER: 0
+      with:
+        path: ${{ env.CONDA }}/envs/${{ env.CONDA_ENV_NAME }}
+        key: ${{ runner.os }}-conda-env-${{ env.CACHE_NUMBER }}-${{ hashFiles('conda-linux-64.lock') }}
+
+    - uses: conda-incubator/setup-miniconda@v2
+      with:
+        miniforge-variant: Mambaforge
+        miniforge-version: latest
+        use-mamba: true
+        use-only-tar-bz2: true # for caching to work properly
+        auto-activate-base: false
+        environment-file: ./conda-linux-64.lock
+        activate-environment: ${{ env.CONDA_ENV_NAME }}
+
+    - name: Check core dependencies
       run: |
-        python -m pip install --upgrade pip
-        python -m pip install --upgrade poetry==1.3.*
+        conda info
+        poetry --version
+
+    - name: Install dependencies
+      run: |
         poetry install
+
     - name: Check code quality
       run: |
         poetry run black --check .
         poetry run isort . --check --diff
         poetry run flake8 . --count --show-source --statistics
+
     - name: Test Run
       run: |
         poetry run python -m src.app
