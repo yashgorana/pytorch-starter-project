@@ -19,13 +19,11 @@ ipykernel = "^6.22.0"
 mlflow-skinny = "^2.2.2"
 
 [tool.poetry.group.pytorch.dependencies]
-torch = "2.0.0"
-torchvision = "0.15.1"
 lightning = "2.0.0"
 timm = "^0.6.12"
 transformers = "^4.27.2"
 pydantic = "<=1.10.4" # Fix lightning https://github.com/Lightning-AI/lightning/issues/17106
-fastapi = "0.86" # Fix lightning https://github.com/Lightning-AI/lightning/issues/17106
+fastapi = "0.88" # Fix lightning https://github.com/Lightning-AI/lightning/issues/17106
 
 [tool.poetry.group.dev.dependencies]
 black = {extras = ["jupyter"], version = "^23.1.0"}

@@ -13,7 +13,7 @@ dependencies:
   - poetry=1.4.*
   - pytorch::pytorch-cuda=11.7
   - pytorch::pytorch=2.0.0
-  - pytorch::torchvision=0.15.1
+  - pytorch::torchvision=0.15.0
 
 platforms:
   - linux-64
