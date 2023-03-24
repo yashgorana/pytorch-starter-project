@@ -1,2 +1,5 @@
 [virtualenvs]
 in-project = true
+
+[installer]
+modern-installation = false # https://github.com/python-poetry/poetry/issues/7686, https://github.com/microsoft/debugpy/issues/1246
