@@ -28,6 +28,8 @@ jobs:
     defaults:
       run:
         shell: bash -el {0}
+    env:
+      CONDA_ENV_NAME: pytorch2-env
 
     steps:
     - uses: actions/checkout@v3
@@ -40,17 +42,25 @@ jobs:
       with:
         path: ~/conda_pkgs_dir
         key: ${{ runner.os }}-conda-lock-${{ env.CACHE_NUMBER }}-${{ hashFiles('conda-linux-64.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-conda-lock-${{ env.CACHE_NUMBER }}-${{ hashFiles('conda-linux-64.lock') }}
+
+    - name: Cache conda environment
+      uses: actions/cache@v3
+      env:
+        # Increase this value to reset cache
+        CACHE_NUMBER: 0
+      with:
+        path: ${{ env.CONDA }}/envs/${{ env.CONDA_ENV_NAME }}
+        key: ${{ runner.os }}-conda-env-${{ env.CACHE_NUMBER }}-${{ hashFiles('conda-linux-64.lock') }}
 
     - uses: conda-incubator/setup-miniconda@v2
       with:
         miniforge-variant: Mambaforge
         miniforge-version: latest
         use-mamba: true
+        use-only-tar-bz2: true # for caching to work properly
         auto-activate-base: false
         environment-file: ./conda-linux-64.lock
-        activate-environment: pytorch-venv
+        activate-environment: ${{ env.CONDA_ENV_NAME }}
 
     - name: Check core dependencies
       run: |
