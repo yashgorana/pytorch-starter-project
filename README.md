@@ -1,6 +1,6 @@
 # PyTorch Starter Project
 
-A start project for PyTorch 1.13 with GPU support (CUDA 11.6).
+A start project for PyTorch 2.0 with GPU support (CUDA 11.7).
 
 Includes the following libraries for typical ML projects
 
