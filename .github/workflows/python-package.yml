@@ -25,29 +25,35 @@ jobs:
   build-linux:
     name: Build with ubuntu-latest
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: bash -el {0}
 
     steps:
     - uses: actions/checkout@v3
 
-    - uses: actions/cache@v3
+    - name: Cache conda packages
+      uses: actions/cache@v3
+      env:
+        # Increase this value to reset cache
+        CACHE_NUMBER: 0
       with:
-        path: .venv
-        key: ${{ runner.os }}-conda-lock-${{ hashFiles('conda-linux-64.lock') }}
+        path: ~/conda_pkgs_dir
+        key: ${{ runner.os }}-conda-lock-${{ env.CACHE_NUMBER }}-${{ hashFiles('conda-linux-64.lock') }}
         restore-keys: |
-          ${{ runner.os }}-conda-lock-${{ hashFiles('conda-linux-64.lock') }}
+          ${{ runner.os }}-conda-lock-${{ env.CACHE_NUMBER }}-${{ hashFiles('conda-linux-64.lock') }}
 
     - uses: conda-incubator/setup-miniconda@v2
       with:
-        miniconda-version: "latest"
-        auto-update-conda: true
+        miniforge-variant: Mambaforge
+        miniforge-version: latest
+        use-mamba: true
         auto-activate-base: false
         environment-file: ./conda-linux-64.lock
-        activate-environment: ./.venv
+        activate-environment: pytorch-venv
 
     - name: Check core dependencies
       run: |
-        conda info
-        conda activate ./.venv
         conda info
         poetry --version
 
