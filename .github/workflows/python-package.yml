@@ -29,6 +29,13 @@ jobs:
     steps:
     - uses: actions/checkout@v3
 
+    - uses: actions/cache@v3
+      with:
+        path: .venv
+        key: ${{ runner.os }}-conda-lock-${{ hashFiles('conda-linux-64.lock') }}
+        restore-keys: |
+          ${{ runner.os }}-conda-lock-${{ hashFiles('conda-linux-64.lock') }}
+
     - uses: conda-incubator/setup-miniconda@v2
       with:
         miniconda-version: "latest"
@@ -39,9 +46,9 @@ jobs:
 
     - name: Check core dependencies
       run: |
-        conda --version
-        python --version
-        pip --version
+        conda info
+        conda activate ./.venv
+        conda info
         poetry --version
 
     - name: Install dependencies
